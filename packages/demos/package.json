@@ -11,7 +11,8 @@
     ]
   },
   "scripts": {
-    "build:todomvc": "yarn webpack --config src/todomvc/webpack-config.js --mode production"
+    "build:todomvc": "yarn webpack --config src/todomvc/webpack-config.js --mode production",
+    "build:zoid": "yarn webpack --config src/react-loading-zoid/webpack-config.js --mode production"
   },
   "dependencies": {
     "@blueprintjs/core": "^3.10.0",

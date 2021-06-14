@@ -51,6 +51,8 @@ function createDocumentHtml(
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         ${stylesheetLinks}
+        <!-- TODO - this is here because zoid must be loaded before component definition -->
+        <script src="http://localhost:1337/dist/zoid.min.js"></script>
       </head>
       <body>
         ${bodyHtml}
@@ -73,7 +75,7 @@ async function startServer(
   nodeIntegratorWebpackConfig,
   demoName
 ) {
-  const port = await getPort(demoName ? {port: 3000} : undefined);
+  const port = await getPort(demoName ? {port: 3001} : undefined);
   const app = express();
 
   for (const compiler of webpack(webpackConfigs).compilers) {
