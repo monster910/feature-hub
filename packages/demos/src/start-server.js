@@ -52,7 +52,8 @@ function createDocumentHtml(
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         ${stylesheetLinks}
         <!-- TODO - this is here because zoid must be loaded before component definition -->
-        <script src="http://localhost:1337/dist/zoid.min.js"></script>
+        <!-- Webpack builds did not work and zoid was not defined with UMD -->
+        <script src="http://localhost:1337/dist/zoid.frameworks.js"></script>
       </head>
       <body>
         ${bodyHtml}

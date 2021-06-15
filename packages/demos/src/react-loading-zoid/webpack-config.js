@@ -24,6 +24,15 @@ const configs = [
     output: {
       filename: 'integrator.js',
       publicPath: '/',
+      globalObject: 'this',
+    },
+    externals: {
+      zoid: { // UMD
+        commonjs: "zoid",
+        commonjs2: "zoid",
+        amd: "zoid",
+        root: "zoid"
+      }
     },
   }),
 ];

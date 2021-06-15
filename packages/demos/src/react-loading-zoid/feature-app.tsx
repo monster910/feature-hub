@@ -1,15 +1,16 @@
 import {Text} from '@blueprintjs/core';
 import {FeatureAppDefinition} from '@feature-hub/core';
 import {ReactFeatureApp} from '@feature-hub/react';
-import Zoid from './zoid-component';
+import LoginZoid from './login-zoid-component';
 import * as React from 'react';
-// import { useScripts } from './useScripts';
+// import {ZoidFrameworkContextProvider} from './zoid-context';
+// import {useScripts} from "./useScripts";
 
 const getFakeServerLag = async (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
 async function fetchDataFromServer(): Promise<string> {
-  await getFakeServerLag(1000);
+  await getFakeServerLag(500);
 //
 //   if (Math.random() > 0.5) {
 //     throw Error(`Server Error: Bad luck!
@@ -38,6 +39,18 @@ const App: React.FunctionComponent<AppProps> = ({
 
   React.useEffect(() => {
     console.log('fetching data');
+
+    // this is a load inside the feature-app. It does not work with the UMD definition. See webpack-config.js
+    // async function loadZoidDefinition() {
+    //   const zoidUrls = [
+    //     'http://localhost:1337/dist/zoid.frameworks.js'
+    //   ];
+    //   // load component definition script
+    //   await useScripts(zoidUrls, false);
+    //
+    // }
+    // loadZoidDefinition();
+
     fetchDataFromServer()
       .then(setServerResponse)
       .then(loadingDone)
@@ -48,11 +61,14 @@ const App: React.FunctionComponent<AppProps> = ({
     return null;
   }
 
+  console.log('render feature app');
   return (
     <Text>
       <span>The feature app is using a zoid component:</span>
       <pre>
-        <Zoid id={config.id} url={config.url} />
+        {/*<ZoidFrameworkContextProvider url={'http://localhost:1337/dist/zoid.min.js'}>*/}
+          <LoginZoid id={config.id} url={config.url} />
+        {/*</ZoidFrameworkContextProvider>*/}
       </pre>
     </Text>
   );

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 // import styles from './zoid-component.module.scss';
-import { ZoidProps, ZoidMessageTypes } from './zoid-component.types';
+import { LoginZoidProps, LoginZoidMessageTypes } from './login-zoid-component.types';
 import { useScripts } from "./useScripts";
 
-const Zoid: React.FC<ZoidProps> = (props: ZoidProps) => {
+const LoginZoid: React.FC<LoginZoidProps> = (props: LoginZoidProps) => {
   console.log('initialize Zoid Component');
   console.log(props.url);
   if (props.url === undefined) {
@@ -19,9 +19,9 @@ const Zoid: React.FC<ZoidProps> = (props: ZoidProps) => {
     console.log(event);
     // ignore messages
     if (props.url.includes(event.origin)) { return; }
-    switch(event.data.type as ZoidMessageTypes) {
+    switch(event.data.type as LoginZoidMessageTypes) {
 
-      case ZoidMessageTypes.RENDER_COMPLETE:
+      case LoginZoidMessageTypes.RENDER_COMPLETE:
         console.log('react-loading-zoid ===> Zoid Render complete');
         break;
     }
@@ -52,7 +52,6 @@ const Zoid: React.FC<ZoidProps> = (props: ZoidProps) => {
         setError(error);
         throw error;
       }
-
     }
     loadComponentDefinition()
   }, []);
@@ -69,4 +68,4 @@ const Zoid: React.FC<ZoidProps> = (props: ZoidProps) => {
   );
 };
 
-export default Zoid;
+export default LoginZoid;

@@ -5,7 +5,7 @@ import {FeatureAppLoader, FeatureHubContextProvider} from '@feature-hub/react';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import '../blueprint-css';
-// import {ZoidFrameworkContextProvider} from './zoid-context';
+import {ZoidFrameworkContextProvider} from './zoid-context';
 
 defineExternals({react: React});
 
@@ -22,16 +22,14 @@ function ErrorUi({error}: {error: Error}): JSX.Element {
     </Callout>
   );
 }
-//
-// React.useEffect(() => {
-//   console.log('useEffect for integrator');
-// });
 
 const config = { id: 'featureAppId', url: 'http://localhost:1337/demo/frameworks/react/login.js' };
 
+// this is implemented using the framework that is context loaded. Dynamic scripts loaded with UMD are not created a new
+// definition which fails. See ../start-server.js which the framework is added directly in HEAD of HTML doc
 ReactDOM.render(
   <div style={{padding: '20px'}}>
-    {/*<ZoidFrameworkContextProvider url={'http://localhost:1337/dist/zoid.min.js'}>*/}
+    <ZoidFrameworkContextProvider url={'http://localhost:1337/dist/zoid.frameworks.js'}>
       <FeatureHubContextProvider value={{featureAppManager}}>
         <FeatureAppLoader
           featureAppId="test:invalid"
@@ -61,7 +59,7 @@ ReactDOM.render(
           }}
         </FeatureAppLoader>
       </FeatureHubContextProvider>
-    {/*</ZoidFrameworkContextProvider>*/}
+    </ZoidFrameworkContextProvider>
   </div>,
   document.querySelector('main')
 );
